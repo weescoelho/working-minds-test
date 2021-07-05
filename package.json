@@ -7,7 +7,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"yarn start\" \"json-server -p 8080 db.json\""
+    "dev": "concurrently \"yarn start\" \"json-server -p 8080 db.json\"",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "lint": "eslint ./",
+    "lintFix": "eslint ./ --fix"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
