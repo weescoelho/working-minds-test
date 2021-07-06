@@ -1,0 +1,135 @@
+import { api } from 'api/api';
+import { AxiosResponse } from 'axios';
+import React, { createContext, Dispatch, SetStateAction } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
+import { Cities, City, State, States } from 'utils/types';
+
+interface DataContextType {
+  cities: Cities | undefined;
+  states: States | undefined;
+  loading: boolean;
+  setCities: Dispatch<SetStateAction<City[] | undefined>>;
+  setStates: Dispatch<SetStateAction<State[] | undefined>>;
+  getCitiesByStateId: (stateId: string) => Promise<AxiosResponse<City[]>>;
+  deleteStateById: (id: string) => Promise<void>;
+  deleteCityById: (id: string) => Promise<void>;
+  createNewCity: (cityName: string, stateId: string) => Promise<void>;
+  createNewState: (stateName: string) => Promise<void>;
+  updateState: (newStateName: string, stateId: string) => Promise<void>;
+  getData: () => void;
+}
+
+export const DataContext = createContext({} as DataContextType);
+
+export const DataContextProvider: React.FC = ({ children }) => {
+  const [loading, setLoading] = useState(false);
+  const [cities, setCities] = useState<Array<City>>();
+  const [states, setStates] = useState<States>();
+  const { addToast } = useToasts();
+
+  useEffect(() => {
+    const getData = async (): Promise<void> => {
+      setLoading(true);
+      const citiesResponse = await api.get(`/cities`);
+      const statesResponse = await api.get(`/states`);
+      setCities(citiesResponse.data);
+      setStates(statesResponse.data);
+      setLoading(false);
+    };
+    getData();
+  }, []);
+
+  const getData = async (): Promise<void> => {
+    setLoading(true);
+    const citiesResponse = await api.get(`/cities`);
+    const statesResponse = await api.get(`/states`);
+    setCities(citiesResponse.data);
+    setStates(statesResponse.data);
+    setLoading(false);
+  };
+
+  const getCitiesByStateId = async (
+    stateId: string,
+  ): Promise<AxiosResponse<City[]>> => {
+    const response = await api.get(`/cities?stateId=${stateId}`);
+    return response;
+  };
+
+  const deleteStateById = async (id: string): Promise<void> => {
+    await api.delete(`/states/${id}`);
+  };
+
+  const deleteCityById = async (id: string): Promise<void> => {
+    await api.delete(`/cities/${id}`);
+  };
+
+  const createNewCity = async (
+    cityName: string,
+    stateId: string,
+  ): Promise<void> => {
+    try {
+      await api.post('/cities', {
+        name: cityName,
+        stateId,
+      });
+      addToast('Estado cadastrado com sucesso', {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+    } catch {
+      addToast('Não foi possivel cadastrar!', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+  };
+
+  const createNewState = async (stateName: string): Promise<void> => {
+    try {
+      await api.post('/states', {
+        name: stateName,
+      });
+      addToast('Estado cadastrado com sucesso', {
+        appearance: 'success',
+        autoDismiss: true,
+      });
+    } catch {
+      addToast('Não foi possivel cadastrar!', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
+  };
+
+  const updateState = async (
+    newStateName: string,
+    stateId: string,
+  ): Promise<void> => {
+    await api.put(`/states/${stateId}`, {
+      name: newStateName,
+    });
+  };
+
+  return (
+    <DataContext.Provider
+      value={{
+        cities,
+        loading,
+        setCities,
+        states,
+        setStates,
+        getCitiesByStateId,
+        deleteStateById,
+        deleteCityById,
+        createNewCity,
+        createNewState,
+        updateState,
+        getData,
+      }}
+    >
+      {children}
+    </DataContext.Provider>
+  );
+};
