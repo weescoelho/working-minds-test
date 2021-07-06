@@ -59,7 +59,20 @@ export const DataContextProvider: React.FC = ({ children }) => {
   };
 
   const deleteStateById = async (id: string): Promise<void> => {
-    await api.delete(`/states/${id}`);
+    try {
+      const response = await api.delete(`/states/${id}`);
+      if (response.status === 200) {
+        addToast('Estado deletado com sucesso!', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+      }
+    } catch {
+      addToast('Não foi possivel deletar!', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
   };
 
   const deleteCityById = async (id: string): Promise<void> => {
