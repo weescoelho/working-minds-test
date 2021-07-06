@@ -1,12 +1,13 @@
 import { Button } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import { api } from 'api/api';
 import { DataContext } from 'contexts/DataContext';
 import { useContext } from 'react';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import DeleteIcon from '@material-ui/icons/Delete';
 import { City } from 'utils/types';
 
 const CardContainer = styled.div`
@@ -71,13 +72,9 @@ export function CityCard({
       <CardContainer>
         <p>{cityName}</p>
         <div>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={handleUpdateCityName}
-          >
-            Editar
-          </Button>
+          <IconButton aria-label="edit" onClick={handleUpdateCityName}>
+            <EditIcon />
+          </IconButton>
           <IconButton aria-label="delete" onClick={handleDeleteCity}>
             <DeleteIcon />
           </IconButton>
