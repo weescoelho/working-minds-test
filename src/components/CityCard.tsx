@@ -3,6 +3,7 @@ import { api } from 'api/api';
 import { DataContext } from 'contexts/DataContext';
 import { useContext } from 'react';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { City } from 'utils/types';
 import { Loading } from '../helpers/Loading';
@@ -47,12 +48,13 @@ type StateCardProps = {
 
 export function CityCard({
   cityId,
-  cityName = 'São Paulo',
+  cityName,
   setDataCities,
   stateId,
 }: StateCardProps): JSX.Element {
   const [loading, setLoading] = useState(false);
   const { deleteCityById } = useContext(DataContext);
+  const history = useHistory();
 
   const getDataOnUpdate = async (): Promise<void> => {
     setLoading(true);
@@ -68,12 +70,20 @@ export function CityCard({
     setLoading(false);
   };
 
+  const handleUpdateCityName = (): void => {
+    history.push(`/cidade/editar/${cityId}/${cityName}`);
+  };
+
   return (
     <CardContainer>
       {loading && <Loading />}
       <p>{cityName}</p>
       <div>
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleUpdateCityName}
+        >
           Editar
         </Button>
         <Button
