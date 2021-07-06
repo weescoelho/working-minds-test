@@ -9,7 +9,6 @@ import { Loading } from 'helpers/Loading';
 import { useContext } from 'react';
 import { FormEvent, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useToasts } from 'react-toast-notifications';
 import { City, State } from 'utils/types';
 import {
   Container,
@@ -28,7 +27,6 @@ export function StatePage(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const params = useParams<StatePageParams>();
   const history = useHistory();
-  const { addToast } = useToasts();
   const [newCity, setNewCity] = useState('');
 
   useEffect(() => {
@@ -67,10 +65,6 @@ export function StatePage(): JSX.Element {
 
   const handleDeleteState = async (): Promise<void> => {
     await deleteStateById(params.id);
-    addToast('Estado excluido com sucesso!', {
-      appearance: 'success',
-      autoDismiss: true,
-    });
     history.push('/');
   };
 
