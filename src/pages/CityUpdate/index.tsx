@@ -27,9 +27,9 @@ type StatePageParams = {
   name: string;
 };
 
-export function StateUpdate(): JSX.Element {
-  const { updateState, getData } = useContext(DataContext);
-  const [newStateName, setNewStateName] = useState('');
+export function CityUpdate(): JSX.Element {
+  const { updateCity, getData } = useContext(DataContext);
+  const [newCityName, setNewCityName] = useState('');
   const [loading, setLoading] = useState(false);
   const params = useParams<StatePageParams>();
   const history = useHistory();
@@ -37,11 +37,11 @@ export function StateUpdate(): JSX.Element {
   const handleStateSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
     setLoading(true);
-    await updateState(newStateName, params.id);
+    await updateCity(newCityName, params.id);
     await getData();
     setLoading(false);
     history.push('/');
-    setNewStateName('');
+    setNewCityName('');
   };
 
   return (
@@ -49,14 +49,14 @@ export function StateUpdate(): JSX.Element {
       {loading && <Loading />}
       <Header />
       <Container>
-        <h2>Editar estado: {params.name}</h2>
+        <h2>Editar cidade: {params.name}</h2>
         <form onSubmit={handleStateSubmit}>
           <TextField
             id="outlined-helperText"
             label="Novo nome"
-            helperText="Digite o nome do estado"
+            helperText="Digite o nome da cidade"
             variant="outlined"
-            onChange={({ target }) => setNewStateName(target.value)}
+            onChange={({ target }) => setNewCityName(target.value)}
           />
           <Button variant="contained" type="submit" color="primary">
             Alterar nome

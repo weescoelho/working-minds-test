@@ -40,11 +40,18 @@ const StateGrid = styled.div`
 `;
 
 export function Home(): JSX.Element {
-  const { states, loading } = useContext(DataContext);
+  const { states, loading, getData } = useContext(DataContext);
   const history = useHistory();
   const handleCreateState = (): void => {
     history.push('/cadastrar/estado');
   };
+
+  useEffect(() => {
+    const request = async (): Promise<void> => {
+      await getData();
+    };
+    request();
+  }, []);
 
   return (
     <>

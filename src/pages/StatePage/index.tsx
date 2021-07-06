@@ -60,7 +60,7 @@ export function StatePage(): JSX.Element {
   };
 
   const handleUpdateStateName = (): void => {
-    history.push(`/estado/editar/${params.id}`);
+    history.push(`/estado/editar/${params.id}/${dataState?.name}`);
   };
 
   const handleDeleteState = async (): Promise<void> => {

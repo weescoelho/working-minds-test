@@ -1,3 +1,4 @@
+import { CityUpdate } from 'pages/CityUpdate';
 import { StateForm } from 'pages/StateForm';
 import { StatePage } from 'pages/StatePage';
 import { StateUpdate } from 'pages/StateUpdate';
@@ -11,7 +12,8 @@ const Routes: React.FC = () => (
       <Route path="/" exact component={Home} />
       <Route path="/cadastrar/estado" exact component={StateForm} />
       <Route path="/estado/:id" exact component={StatePage} />
-      <Route path="/estado/editar/:id" exact component={StateUpdate} />
+      <Route path="/estado/editar/:id/:name" exact component={StateUpdate} />
+      <Route path="/cidade/editar/:id/:name" exact component={CityUpdate} />
     </Switch>
   </Router>
 );

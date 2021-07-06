@@ -3,16 +3,11 @@
     {
       "name": "São Paulo",
       "id": "1"
-    },
-    {
-      "name": "Piaui",
-      "id": "ZgzVvIJ"
     }
   ],
   "cities": [
     {
-      "name": "Barueri",
-      "stateId": "1",
+      "name": "Francisco Morato",
       "id": 3
     }
   ]
