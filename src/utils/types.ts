@@ -1,12 +1,14 @@
 export type State = {
-  name: string;
-};
-
-export type City = {
-  name: string;
-};
-
-export type States = {
+  id: string;
   name: string;
   cities: Array<City>;
 };
+
+export type City = {
+  id: string;
+  name: string;
+};
+
+export type States = Array<State>;
+
+export type Cities = Array<City>;
