@@ -1,9 +1,3 @@
-<div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Working Minds Test" />
-
-  &#xa0;
-</div>
-
 <h1 align="center">Working Minds Test</h1>
 
 <p align="center">
