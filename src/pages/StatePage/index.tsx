@@ -1,4 +1,6 @@
 import { Button, TextField } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { api } from 'api/api';
 import { CityCard } from 'components/CityCard';
 import { Header } from 'components/Header';
@@ -88,7 +90,7 @@ export function StatePage(): JSX.Element {
           </div>
           <div>
             <Button
-              variant="contained"
+              variant="outlined"
               type="submit"
               color="primary"
               onClick={handleUpdateStateName}
@@ -96,10 +98,11 @@ export function StatePage(): JSX.Element {
               Editar
             </Button>
             <Button
-              variant="contained"
+              variant="outlined"
               type="submit"
               color="secondary"
               onClick={handleDeleteState}
+              startIcon={<DeleteIcon />}
             >
               Excluir estado
             </Button>
@@ -126,7 +129,12 @@ export function StatePage(): JSX.Element {
               onChange={({ target }) => setNewCity(target.value)}
               defaultValue={newCity}
             />
-            <Button variant="contained" type="submit" color="primary">
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+              startIcon={<SaveIcon />}
+            >
               Cadastrar
             </Button>
           </form>

@@ -1,12 +1,13 @@
 import { Button } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
 import { api } from 'api/api';
 import { DataContext } from 'contexts/DataContext';
 import { useContext } from 'react';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { City } from 'utils/types';
-import { Loading } from '../helpers/Loading';
 
 const CardContainer = styled.div`
   margin: 8px 0;
@@ -48,22 +49,17 @@ export function CityCard({
   setDataCities,
   stateId,
 }: StateCardProps): JSX.Element {
-  const [loading, setLoading] = useState(false);
   const { deleteCityById } = useContext(DataContext);
   const history = useHistory();
 
   const getDataOnUpdate = async (): Promise<void> => {
-    setLoading(true);
     const cities = await api.get(`/cities?stateId=${stateId}`);
     setDataCities(cities.data);
-    setLoading(false);
   };
 
   const handleDeleteCity = async (): Promise<void> => {
-    setLoading(true);
     await deleteCityById(cityId);
     getDataOnUpdate();
-    setLoading(false);
   };
 
   const handleUpdateCityName = (): void => {
@@ -71,25 +67,22 @@ export function CityCard({
   };
 
   return (
-    <CardContainer>
-      {loading && <Loading />}
-      <p>{cityName}</p>
-      <div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleUpdateCityName}
-        >
-          Editar
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={handleDeleteCity}
-        >
-          Excluir
-        </Button>
-      </div>
-    </CardContainer>
+    <>
+      <CardContainer>
+        <p>{cityName}</p>
+        <div>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleUpdateCityName}
+          >
+            Editar
+          </Button>
+          <IconButton aria-label="delete" onClick={handleDeleteCity}>
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      </CardContainer>
+    </>
   );
 }

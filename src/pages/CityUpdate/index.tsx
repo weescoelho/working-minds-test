@@ -1,4 +1,5 @@
 import { Button, TextField } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
 import { Header } from 'components/Header';
 import { DataContext } from 'contexts/DataContext';
 import { Loading } from 'helpers/Loading';
@@ -59,7 +60,12 @@ export function CityUpdate(): JSX.Element {
             variant="outlined"
             onChange={({ target }) => setNewCityName(target.value)}
           />
-          <Button variant="contained" type="submit" color="primary">
+          <Button
+            variant="contained"
+            type="submit"
+            color="primary"
+            startIcon={<SaveIcon />}
+          >
             Alterar nome
           </Button>
         </form>
