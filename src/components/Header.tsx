@@ -3,17 +3,13 @@ import { Logo } from './Logo';
 
 const HeaderContainer = styled.header`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: #51bbfe;
   height: 50px;
   display: flex;
   align-items: center;
   padding: 1rem;
   justify-content: space-between;
-  a {
-    text-decoration: none;
-    color: ${({ theme }) => theme.colors.secondary};
-    margin-right: 8px;
-  }
+  color: #f4f4f4;
 `;
 
 export function Header(): JSX.Element {

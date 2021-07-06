@@ -8,9 +8,9 @@ export default createGlobalStyle`
     box-sizing:border-box;
   }
   body{
-    background:${({ theme }) => theme.colors.background};
+    background: #F8F8F8;
     font-size: 14px;
-    color:${({ theme }) => theme.colors.text};
+    color: #333;
   }
   body, input,button,textarea{
     font: 400 16px 'Roboto', sans-serif;

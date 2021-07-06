@@ -1,6 +1,6 @@
 import { api } from 'api/api';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { City } from 'utils/types';
 
@@ -12,7 +12,7 @@ const CardContainer = styled.div`
   cursor: pointer;
   a {
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.text};
+    color: #333;
   }
 `;
 
@@ -21,11 +21,9 @@ type StateCardProps = {
   stateName: string;
 };
 
-export function StateCard({
-  id,
-  stateName = 'São Paulo',
-}: StateCardProps): JSX.Element {
+export function StateCard({ id, stateName }: StateCardProps): JSX.Element {
   const [cities, setCities] = useState<Array<City>>();
+  const history = useHistory();
   useEffect(() => {
     const getData = async (): Promise<void> => {
       const response = await api.get(`/cities?stateId=${id}`);
@@ -34,12 +32,14 @@ export function StateCard({
     getData();
   }, [id]);
 
+  const handleClick = (): void => {
+    history.push(`/estado/${id}`);
+  };
+
   return (
-    <CardContainer>
-      <Link to={`/estado/${id}`}>
-        <h3>{stateName}</h3>
-        <p>Cidades cadastradas:{cities?.length}</p>
-      </Link>
+    <CardContainer onClick={handleClick}>
+      <h3>{stateName}</h3>
+      <p>Cidades cadastradas:{cities?.length}</p>
     </CardContainer>
   );
 }
