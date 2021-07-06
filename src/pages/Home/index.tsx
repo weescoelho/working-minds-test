@@ -59,6 +59,7 @@ export function Home(): JSX.Element {
       <Header />
       <Container>
         <StateGrid>
+          {states?.length === 0 && <div>Não há estados cadastrados</div>}
           {states &&
             states.map(state => (
               <StateCard key={state.id} id={state.id} stateName={state.name} />
