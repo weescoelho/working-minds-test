@@ -1,8 +1,6 @@
 import { Button } from '@material-ui/core';
 import { api } from 'api/api';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { State } from 'utils/types';
 
 const CardContainer = styled.div`
   margin: 8px 0;

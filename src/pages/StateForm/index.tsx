@@ -1,7 +1,8 @@
 import { Button, TextField } from '@material-ui/core';
 import { api } from 'api/api';
 import { Header } from 'components/Header';
-import React, { FormEvent, useState } from 'react';
+import { Loading } from 'helpers/Loading';
+import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import styled from 'styled-components';
@@ -23,6 +24,7 @@ const Container = styled.div`
 
 export function StateForm(): JSX.Element {
   const [state, setState] = useState('');
+  const [loading, setLoading] = useState(false);
   const { addToast } = useToasts();
   const history = useHistory();
 
@@ -30,7 +32,7 @@ export function StateForm(): JSX.Element {
     event.preventDefault();
     const createState = async (): Promise<any> => {
       try {
-        const response = await api.post('/states', {
+        await api.post('/states', {
           name: state,
         });
         addToast('Estado cadastrado com sucesso', {
@@ -51,6 +53,7 @@ export function StateForm(): JSX.Element {
 
   return (
     <>
+      {loading && <Loading />}
       <Header />
       <Container>
         <h2>Cadastrar Estado</h2>
