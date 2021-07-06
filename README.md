@@ -7,8 +7,6 @@
 
   <img alt="Tamanho do repositório" src="https://img.shields.io/github/repo-size/weescoelho/working-minds-test?color=56BEB8">
 
-  <img alt="Licença" src="https://img.shields.io/github/license/weescoelho/working-minds-test?color=56BEB8">
-
 </p>
 
 <p align="center">
