@@ -9,6 +9,21 @@ export const Container = styled.section`
   > button {
     margin-top: 32px;
   }
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: anim 0.3s ease forwards;
+  @keyframes anim {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @media (max-width: 739px) {
+    max-width: 300px;
+  }
+  @media (min-width: 739px) and (max-width: 979px) {
+    max-width: 640px;
+  }
 `;
 
 export const SectionHeader = styled.div`
@@ -17,6 +32,13 @@ export const SectionHeader = styled.div`
   justify-content: space-between;
   button {
     margin-left: 8px;
+  }
+  @media (max-width: 739px) {
+    flex-direction: column;
+    text-align: center;
+    div + div {
+      margin-top: 16px;
+    }
   }
 `;
 

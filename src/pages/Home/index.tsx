@@ -11,6 +11,21 @@ import { StateCard } from '../../components/StateCard';
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: anim 0.3s ease forwards;
+  @keyframes anim {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @media (max-width: 739px) {
+    max-width: 300px;
+  }
+  @media (min-width: 739px) and (max-width: 979px) {
+    max-width: 640px;
+  }
 `;
 
 const StateGrid = styled.div`
@@ -19,6 +34,10 @@ const StateGrid = styled.div`
   column-gap: 16px;
   row-gap: 16px;
   margin: 64px 0;
+  @media (max-width: 739px) {
+    grid-template-columns: 1fr;
+    column-gap: 0px;
+  }
 `;
 
 export function Home(): JSX.Element {

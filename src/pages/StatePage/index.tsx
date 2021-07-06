@@ -24,7 +24,6 @@ export function StatePage(): JSX.Element {
   const params = useParams<StatePageParams>();
   const history = useHistory();
   const { addToast } = useToasts();
-
   const [newCity, setNewCity] = useState('');
 
   const getDataOnUpdate = async (): Promise<void> => {
@@ -118,7 +117,12 @@ export function StatePage(): JSX.Element {
         </SectionHeader>
         {dataCities &&
           dataCities.map(city => (
-            <CityCard cityName={city.name} cityId={city.id} />
+            <CityCard
+              stateId={params.id}
+              cityName={city.name}
+              cityId={city.id}
+              setDataCities={setDataCities}
+            />
           ))}
         <CreateNewCityArea>
           <h3>Cadastrar nova cidade</h3>
@@ -129,6 +133,7 @@ export function StatePage(): JSX.Element {
               helperText="Digite o nome da cidade"
               variant="outlined"
               onChange={({ target }) => setNewCity(target.value)}
+              defaultValue={newCity}
             />
             <Button variant="contained" type="submit" color="primary">
               Cadastrar
