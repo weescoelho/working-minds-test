@@ -108,9 +108,22 @@ export const DataContextProvider: React.FC = ({ children }) => {
     newStateName: string,
     stateId: string,
   ): Promise<void> => {
-    await api.put(`/states/${stateId}`, {
-      name: newStateName,
-    });
+    try {
+      const response = await api.put(`/states/${stateId}`, {
+        name: newStateName,
+      });
+      if (response.status === 200) {
+        addToast('Nome atualizado com sucesso', {
+          appearance: 'info',
+          autoDismiss: true,
+        });
+      }
+    } catch {
+      addToast('Não foi possivel atualizar!', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    }
   };
 
   const updateCity = async (
