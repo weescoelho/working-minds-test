@@ -32,6 +32,7 @@ export function StateForm(): JSX.Element {
     event.preventDefault();
     const createState = async (): Promise<any> => {
       try {
+        setLoading(true);
         await api.post('/states', {
           name: state,
         });
@@ -39,6 +40,7 @@ export function StateForm(): JSX.Element {
           appearance: 'success',
           autoDismiss: true,
         });
+        setLoading(false);
         history.push('/');
       } catch {
         addToast('Não foi possivel cadastrar!', {
