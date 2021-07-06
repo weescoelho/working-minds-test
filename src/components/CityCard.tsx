@@ -14,7 +14,6 @@ const CardContainer = styled.div`
   background-color: #fff;
   border-radius: 5px;
   padding: 1rem;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
