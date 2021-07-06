@@ -30,7 +30,7 @@ Desafio proposto pela Working Minds Tecnologia para a vaga de desenvolvedor fron
 Descrição do desafio:
 Criar um CRUD de estados e cidades, tendo cada cidade seu estado como relacionamento.
 
-### Pontos de melhoria
+### Pontos de melhoria futura
 1. Implementação de mocks para as requisições da API;
 2. Troca de tema;
 
@@ -49,9 +49,11 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [React](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Style-Components](https://styled-components.com/)
+- [Styled-Components](https://styled-components.com/)
+- [Material-UI](https://material-ui.com/)
+- [Axios](https://axios-http.com/)
 
-Foi usado tambem para o projeto o auxilio da biblioteca commitizen para criação de commits semânticos
+Foi usado tambem para o projeto o auxilio da biblioteca commitizen para criação de commits semânticos.
 
 ## :white_check_mark: Pré requisitos ##
 
