@@ -41,7 +41,7 @@ export function CityUpdate(): JSX.Element {
     await updateCity(newCityName, params.id, params.stateId);
     await getData();
     setLoading(false);
-    history.push('/');
+    history.push(`/estado/${params.stateId}`);
     setNewCityName('');
   };
 
