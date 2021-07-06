@@ -67,7 +67,7 @@ export function CityCard({
   };
 
   const handleUpdateCityName = (): void => {
-    history.push(`/cidade/editar/${cityId}/${cityName}`);
+    history.push(`/cidade/editar/${stateId}/${cityId}/${cityName}`);
   };
 
   return (

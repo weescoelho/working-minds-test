@@ -25,6 +25,7 @@ const Container = styled.div`
 type StatePageParams = {
   id: string;
   name: string;
+  stateId: string;
 };
 
 export function CityUpdate(): JSX.Element {
@@ -37,7 +38,7 @@ export function CityUpdate(): JSX.Element {
   const handleStateSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
     setLoading(true);
-    await updateCity(newCityName, params.id);
+    await updateCity(newCityName, params.id, params.stateId);
     await getData();
     setLoading(false);
     history.push('/');

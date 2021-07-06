@@ -1,6 +1,6 @@
 import { api } from 'api/api';
 import { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { City } from 'utils/types';
 

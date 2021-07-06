@@ -108,6 +108,7 @@ export function StatePage(): JSX.Element {
         {dataCities &&
           dataCities.map(city => (
             <CityCard
+              key={city.id}
               stateId={params.id}
               cityName={city.name}
               cityId={city.id}

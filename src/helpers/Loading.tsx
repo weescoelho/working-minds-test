@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   background: rgba(0, 0, 0, 0.1);
   height: 100vh;
   width: 100vw;
+  z-index: 9999;
   img {
     width: 150px;
   }

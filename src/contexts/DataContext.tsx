@@ -18,7 +18,11 @@ interface DataContextType {
   createNewCity: (cityName: string, stateId: string) => Promise<void>;
   createNewState: (stateName: string) => Promise<void>;
   updateState: (newStateName: string, stateId: string) => Promise<void>;
-  updateCity: (newCityName: string, cityId: string) => Promise<void>;
+  updateCity: (
+    newCityName: string,
+    cityId: string,
+    stateId: string,
+  ) => Promise<void>;
   getData: () => void;
 }
 
@@ -159,10 +163,12 @@ export const DataContextProvider: React.FC = ({ children }) => {
   const updateCity = async (
     newCityName: string,
     cityId: string,
+    stateId: string,
   ): Promise<void> => {
     try {
       const response = await api.put(`/cities/${cityId}`, {
         name: newCityName,
+        stateId,
       });
       if (response.status === 200) {
         addToast('Nome atualizado com sucesso', {

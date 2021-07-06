@@ -13,7 +13,11 @@ const Routes: React.FC = () => (
       <Route path="/cadastrar/estado" exact component={StateForm} />
       <Route path="/estado/:id" exact component={StatePage} />
       <Route path="/estado/editar/:id/:name" exact component={StateUpdate} />
-      <Route path="/cidade/editar/:id/:name" exact component={CityUpdate} />
+      <Route
+        path="/cidade/editar/:stateId/:id/:name"
+        exact
+        component={CityUpdate}
+      />
     </Switch>
   </Router>
 );
