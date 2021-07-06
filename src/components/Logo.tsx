@@ -1,4 +1,4 @@
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LogoContainer = styled.div`
