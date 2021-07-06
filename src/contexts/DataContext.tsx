@@ -71,14 +71,16 @@ export const DataContextProvider: React.FC = ({ children }) => {
     stateId: string,
   ): Promise<void> => {
     try {
-      await api.post('/cities', {
+      const response = await api.post('/cities', {
         name: cityName,
         stateId,
       });
-      addToast('Estado cadastrado com sucesso', {
-        appearance: 'success',
-        autoDismiss: true,
-      });
+      if (response.status === 200) {
+        addToast('Estado cadastrado com sucesso', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+      }
     } catch {
       addToast('Não foi possivel cadastrar!', {
         appearance: 'error',
