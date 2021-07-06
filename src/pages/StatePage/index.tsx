@@ -2,7 +2,9 @@ import { Button, TextField } from '@material-ui/core';
 import { api } from 'api/api';
 import { CityCard } from 'components/CityCard';
 import { Header } from 'components/Header';
+import { DataContext } from 'contexts/DataContext';
 import { Loading } from 'helpers/Loading';
+import { useContext } from 'react';
 import { FormEvent, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
@@ -18,6 +20,7 @@ type StatePageParams = {
 };
 
 export function StatePage(): JSX.Element {
+  const { deleteStateById, createNewCity } = useContext(DataContext);
   const [dataCities, setDataCities] = useState<Array<City>>();
   const [dataState, setDataState] = useState<State>();
   const [loading, setLoading] = useState(false);
@@ -25,41 +28,6 @@ export function StatePage(): JSX.Element {
   const history = useHistory();
   const { addToast } = useToasts();
   const [newCity, setNewCity] = useState('');
-
-  const getDataOnUpdate = async (): Promise<void> => {
-    setLoading(true);
-    const cities = await api.get(`/cities?stateId=${params.id}`);
-    const states = await api.get(`/states/${params.id}`);
-    setDataCities(cities.data);
-    setDataState(states.data);
-    setLoading(false);
-  };
-
-  function handleStateSubmit(event: FormEvent): void {
-    event.preventDefault();
-    const createNewCity = async (): Promise<any> => {
-      try {
-        setLoading(true);
-        await api.post('/cities', {
-          name: newCity,
-          stateId: params.id,
-        });
-        addToast('Estado cadastrado com sucesso', {
-          appearance: 'success',
-          autoDismiss: true,
-        });
-        getDataOnUpdate();
-        setLoading(false);
-      } catch {
-        addToast('Não foi possivel cadastrar!', {
-          appearance: 'error',
-          autoDismiss: true,
-        });
-      }
-    };
-    createNewCity();
-    setNewCity('');
-  }
 
   useEffect(() => {
     const getData = async (): Promise<void> => {
@@ -73,13 +41,30 @@ export function StatePage(): JSX.Element {
     getData();
   }, [params.id]);
 
-  const handleDeleteState = (): void => {
-    const deleteState = async (): Promise<void> => {
-      setLoading(true);
-      await api.delete(`/states/${params.id}`);
-      setLoading(false);
-    };
-    deleteState();
+  const getDataOnUpdate = async (): Promise<void> => {
+    setLoading(true);
+    const cities = await api.get(`/cities?stateId=${params.id}`);
+    const states = await api.get(`/states/${params.id}`);
+    setDataCities(cities.data);
+    setDataState(states.data);
+    setLoading(false);
+  };
+
+  const handleNewCitySubmit = async (event: FormEvent): Promise<void> => {
+    event.preventDefault();
+    setLoading(true);
+    await createNewCity(newCity, params.id);
+    getDataOnUpdate();
+    setLoading(false);
+    setNewCity('');
+  };
+
+  const handleUpdateStateName = (): void => {
+    history.push(`/estado/editar/${params.id}`);
+  };
+
+  const handleDeleteState = async (): Promise<void> => {
+    await deleteStateById(params.id);
     addToast('Estado excluido com sucesso!', {
       appearance: 'success',
       autoDismiss: true,
@@ -102,7 +87,12 @@ export function StatePage(): JSX.Element {
             <p>Cidades cadastradas: {dataCities?.length}</p>
           </div>
           <div>
-            <Button variant="contained" type="submit" color="primary">
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+              onClick={handleUpdateStateName}
+            >
               Editar
             </Button>
             <Button
@@ -126,7 +116,7 @@ export function StatePage(): JSX.Element {
           ))}
         <CreateNewCityArea>
           <h3>Cadastrar nova cidade</h3>
-          <form onSubmit={handleStateSubmit}>
+          <form onSubmit={handleNewCitySubmit}>
             <TextField
               id="outlined-helperText"
               label="Nome da cidade"

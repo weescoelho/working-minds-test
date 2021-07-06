@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import { api } from 'api/api';
 import { Loading } from 'helpers/Loading';
+import { DataContext } from 'contexts/DataContext';
+import { useHistory } from 'react-router-dom';
 import { Header } from 'components/Header';
-import { States } from 'utils/types';
 import { Button } from '@material-ui/core';
 import { StateCard } from '../../components/StateCard';
 
@@ -41,20 +40,8 @@ const StateGrid = styled.div`
 `;
 
 export function Home(): JSX.Element {
-  const [data, setData] = useState<States>();
+  const { states, loading } = useContext(DataContext);
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
-
-  React.useEffect(() => {
-    const getData = async (): Promise<void> => {
-      setLoading(true);
-      const stateData = await api.get('/states');
-      setData(stateData.data);
-      setLoading(false);
-    };
-    getData();
-  }, []);
-
   const handleCreateState = (): void => {
     history.push('/cadastrar/estado');
   };
@@ -65,8 +52,8 @@ export function Home(): JSX.Element {
       <Header />
       <Container>
         <StateGrid>
-          {data &&
-            data.map(state => (
+          {states &&
+            states.map(state => (
               <StateCard key={state.id} id={state.id} stateName={state.name} />
             ))}
         </StateGrid>

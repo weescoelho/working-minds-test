@@ -1,5 +1,7 @@
 import { Button } from '@material-ui/core';
 import { api } from 'api/api';
+import { DataContext } from 'contexts/DataContext';
+import { useContext } from 'react';
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 import { City } from 'utils/types';
@@ -50,6 +52,8 @@ export function CityCard({
   stateId,
 }: StateCardProps): JSX.Element {
   const [loading, setLoading] = useState(false);
+  const { deleteCityById } = useContext(DataContext);
+
   const getDataOnUpdate = async (): Promise<void> => {
     setLoading(true);
     const cities = await api.get(`/cities?stateId=${stateId}`);
@@ -59,7 +63,7 @@ export function CityCard({
 
   const handleDeleteCity = async (): Promise<void> => {
     setLoading(true);
-    await api.delete(`/cities/${cityId}`);
+    await deleteCityById(cityId);
     getDataOnUpdate();
     setLoading(false);
   };

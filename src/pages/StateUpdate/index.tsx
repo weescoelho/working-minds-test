@@ -4,7 +4,7 @@ import { DataContext } from 'contexts/DataContext';
 import { Loading } from 'helpers/Loading';
 import { useContext } from 'react';
 import { FormEvent, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -22,19 +22,25 @@ const Container = styled.div`
   }
 `;
 
-export function StateForm(): JSX.Element {
-  const { createNewState } = useContext(DataContext);
-  const [state, setState] = useState('');
+type StatePageParams = {
+  id: string;
+};
+
+export function StateUpdate(): JSX.Element {
+  const { updateState, getData } = useContext(DataContext);
+  const [newStateName, setNewStateName] = useState('');
   const [loading, setLoading] = useState(false);
+  const params = useParams<StatePageParams>();
   const history = useHistory();
 
   const handleStateSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
     setLoading(true);
-    await createNewState(state);
+    await updateState(newStateName, params.id);
+    await getData();
     setLoading(false);
     history.push('/');
-    setState('');
+    setNewStateName('');
   };
 
   return (
@@ -42,17 +48,17 @@ export function StateForm(): JSX.Element {
       {loading && <Loading />}
       <Header />
       <Container>
-        <h2>Cadastrar Estado</h2>
+        <h2>Editar estado</h2>
         <form onSubmit={handleStateSubmit}>
           <TextField
             id="outlined-helperText"
-            label="Nome da cidade"
-            helperText="Digite o nome da cidade"
+            label="Novo nome"
+            helperText="Digite o nome do estado"
             variant="outlined"
-            onChange={({ target }) => setState(target.value)}
+            onChange={({ target }) => setNewStateName(target.value)}
           />
           <Button variant="contained" type="submit" color="primary">
-            Cadastrar
+            Alterar nome
           </Button>
         </form>
       </Container>
