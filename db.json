@@ -2,13 +2,99 @@
   "states": [
     {
       "name": "São Paulo",
-      "id": "1"
+      "id": 1
+    },
+    {
+      "name": "Rio de Janeiro",
+      "id": 2
+    },
+    {
+      "name": "Bahia",
+      "id": 3
+    },
+    {
+      "name": "Piauí",
+      "id": 4
+    },
+    {
+      "name": "Minas Gerais",
+      "id": 5
+    },
+    {
+      "name": "Goías",
+      "id": 6
     }
   ],
   "cities": [
     {
+      "name": "Jundiaí",
+      "stateId": "1",
+      "id": 1
+    },
+    {
       "name": "Francisco Morato",
+      "stateId": "1",
+      "id": 2
+    },
+    {
+      "name": "Franco da Rocha",
+      "stateId": "1",
       "id": 3
+    },
+    {
+      "name": "Rio de Janeiro",
+      "stateId": "2",
+      "id": 4
+    },
+    {
+      "name": "Cabo Frio",
+      "stateId": "2",
+      "id": 5
+    },
+    {
+      "name": "Salvador",
+      "stateId": "3",
+      "id": 6
+    },
+    {
+      "name": "Teresina",
+      "stateId": "4",
+      "id": 7
+    },
+    {
+      "name": "Parnaíba",
+      "stateId": "4",
+      "id": 8
+    },
+    {
+      "name": "Bom Jesus do Piauí",
+      "stateId": "4",
+      "id": 9
+    },
+    {
+      "name": "Uberlândia",
+      "stateId": "5",
+      "id": 10
+    },
+    {
+      "name": "Belo Horizonte",
+      "stateId": "5",
+      "id": 11
+    },
+    {
+      "name": "Goiana",
+      "stateId": "6",
+      "id": 12
+    },
+    {
+      "name": "Cristalina",
+      "stateId": "6",
+      "id": 13
+    },
+    {
+      "name": "Catalão",
+      "stateId": "6",
+      "id": 14
     }
   ]
 }
