@@ -1,5 +1,33 @@
 {
-  "city":[
-    {"name":"Rio"}
+  "states": [
+    {
+      "id": "1",
+      "name": "São Paulo"
+    },
+    {
+      "name": "Bahia",
+      "id": "wUuPPTS"
+    },
+    {
+      "name": "Pernambuco",
+      "id": "wzlfqKa"
+    }
+  ],
+  "cities": [
+    {
+      "name": "Francisco Morato",
+      "stateId": "1",
+      "id": 2
+    },
+    {
+      "name": "Barueri",
+      "stateId": "1",
+      "id": 3
+    },
+    {
+      "name": "Petrolina",
+      "stateId": "wzlfqKa",
+      "id": 4
+    }
   ]
 }
