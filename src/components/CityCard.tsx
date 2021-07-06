@@ -17,6 +17,7 @@ const CardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
   div {
     display: flex;
     align-items: center;
