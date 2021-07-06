@@ -40,7 +40,7 @@ export function StateUpdate(): JSX.Element {
     await updateState(newStateName, params.id);
     await getData();
     setLoading(false);
-    history.push('/');
+    history.push(`/estado/${params.id}`);
     setNewStateName('');
   };
 
