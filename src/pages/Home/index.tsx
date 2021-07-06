@@ -9,7 +9,7 @@ import { StateCard } from '../../components/StateCard';
 
 const Container = styled.div`
   max-width: 900px;
-  margin: 0 auto;
+  margin: 40px auto;
   opacity: 0;
   transform: translateX(-30px);
   animation: anim 0.3s ease forwards;

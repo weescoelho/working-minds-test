@@ -1,6 +1,7 @@
 import { Button, TextField } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import { api } from 'api/api';
 import { CityCard } from 'components/CityCard';
 import { Header } from 'components/Header';
@@ -88,6 +89,7 @@ export function StatePage(): JSX.Element {
               type="submit"
               color="primary"
               onClick={handleUpdateStateName}
+              startIcon={<EditIcon />}
             >
               Editar
             </Button>

@@ -46,6 +46,10 @@ export function CityUpdate(): JSX.Element {
     setNewCityName('');
   };
 
+  const handleReturnPage = (): void => {
+    history.push(`/estado/${params.stateId}`);
+  };
+
   return (
     <>
       {loading && <Loading />}
@@ -69,6 +73,9 @@ export function CityUpdate(): JSX.Element {
             Alterar nome
           </Button>
         </form>
+        <Button variant="contained" color="primary" onClick={handleReturnPage}>
+          Voltar
+        </Button>
       </Container>
     </>
   );

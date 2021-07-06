@@ -45,6 +45,10 @@ export function StateUpdate(): JSX.Element {
     setNewStateName('');
   };
 
+  const handleReturnPage = (): void => {
+    history.push(`/estado/${params.id}`);
+  };
+
   return (
     <>
       {loading && <Loading />}
@@ -68,6 +72,9 @@ export function StateUpdate(): JSX.Element {
             Alterar nome
           </Button>
         </form>
+        <Button variant="contained" color="primary" onClick={handleReturnPage}>
+          Voltar
+        </Button>
       </Container>
     </>
   );
