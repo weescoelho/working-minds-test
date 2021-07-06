@@ -1,3 +1,5 @@
+import { api } from 'api/api';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { City } from 'utils/types';
@@ -17,19 +19,26 @@ const CardContainer = styled.div`
 type StateCardProps = {
   id: string;
   stateName: string;
-  cities: Array<City>;
 };
 
 export function StateCard({
   id,
   stateName = 'São Paulo',
-  cities,
 }: StateCardProps): JSX.Element {
+  const [cities, setCities] = useState<Array<City>>();
+  useEffect(() => {
+    const getData = async (): Promise<void> => {
+      const response = await api.get(`/cities?stateId=${id}`);
+      setCities(response.data);
+    };
+    getData();
+  }, [id]);
+
   return (
     <CardContainer>
       <Link to={`/estado/${id}`}>
         <h3>{stateName}</h3>
-        <p>Cidades cadastradas: {cities.length}</p>
+        <p>Cidades cadastradas:{cities?.length}</p>
       </Link>
     </CardContainer>
   );
